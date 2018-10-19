@@ -346,7 +346,8 @@ try{
       this.channel={};
       this.channel.send=function(x){console.log(x);};
    };
-     module.exports.run(client,new MessageSample(),[' ','run','Идущий В Тенях','alienrolecolor',5,1]);
+   await delay(1000);
+     module.exports.run(client,new MessageSample(),[' ','run','Идущий в Тенях','alienrolecolor',3,1]);
    await delay(1000);
     module.exports.run(client,new MessageSample(),[' ','run','👑','mouserolecolor',1,1]);
    await delay(1000);
