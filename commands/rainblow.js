@@ -6,6 +6,9 @@ exports.system={ delay_time:1000*3, roles_name:{
               rainblow:{  type:'generator',sighns:[1,-1],start_color:0xff0000,
                           colors:[0x000001,0x010000,0x000100]
                       },
+          rainblowgray:{  type:'generator', max:208, sighns:[1,-1],start_color:0xcf3030,
+                          colors:[0x000001,0x010000,0x000100]
+                      },
               redblue:{   type:'generator',sighns:[1],start_color:0xff0000,  
                          colors:[0x000001-0x010000,0x010000-0x000001]
                     },
@@ -19,10 +22,12 @@ exports.system={ delay_time:1000*3, roles_name:{
 '0x2270f9','0x1b5bc0','0x3b32dd','0x6032dd','0x7732dd','0x8532dd','0x9c32dd','0xb432dd','0xb62dd6','0xc32dca','0xb82dad','0xa42cb6','0x952cb6','0x862cb6','0x9f24f3','0xd224f3','0xd11ec7','0x8d3db4','0x6f38a7'
                            ]},
      alienrolecolor:{ type:'storage',colors:[
-"0x06212c", "0x08202c", "0x091f2d", "0x0b1d2e", "0x0c1c2e", "0x0e1b2e", "0x101a2f", "0x111930", "0x131730", "0x141630", "0x161531", "0x181432", "0x191332", "0x1b1132", "0x1c1033", "0x1e0f34", "0x200e34", "0x210d34", "0x230b35", "0x240a36", "0x260936",
+     "0x2e0a0a", "0x2d0b0e", "0x2b0b13", "0x2a0c17", "0x280c1c", "0x270d20", "0x260e25", "0x240e29", "0x230f2e", "0x210f32", "0x201036", "0x1f113b", "0x1d113f", "0x1c1244", "0x1a1248", "0x19134d", "0x181451", "0x161456", "0x15155a", "0x13155f", "0x121663",
+"0x121663", "0x131561", "0x14155f", "0x15145c", "0x16135a", "0x171358", "0x181256", "0x191153", "0x1a1151", "0x1b104f", "0x1c104c", "0x1d0f4a", "0x1e0e48", "0x1f0e46", "0x200d44", "0x210c41", "0x220c3f", "0x230b3d", "0x240a3a", "0x250a38", "0x260936",
 "0x260936", "0x240935", "0x230934", "0x210934", "0x200933", "0x1e0832", "0x1c0831", "0x1b0830", "0x190830", "0x18082f", "0x16082e", "0x14082d", "0x13082c", "0x11082c", "0x10082b", "0x0e082a", "0x0c0729", "0x0b0728", "0x090728", "0x080727", "0x060726",
-"0x060726", "0x080727", "0x0a0727", "0x0c0628", "0x0e0629", "0x10062a", "0x13062a", "0x15062b", "0x17052c", "0x19052c", "0x1b052d", "0x1d052e", "0x1f052e", "0x21042f", "0x230430", "0x260430", "0x280431", "0x2a0432", "0x2c0333", "0x2e0333", "0x300334"
-                     ]},
+"0x060726", "0x080727", "0x0a0727", "0x0c0628", "0x0e0629", "0x10062a", "0x13062a", "0x15062b", "0x17052c", "0x19052c", "0x1b052d", "0x1d052e", "0x1f052e", "0x21042f", "0x230430", "0x260430", "0x280431", "0x2a0432", "0x2c0333", "0x2e0333", "0x300334",
+"0x300334", "0x300332", "0x300430", "0x30042e", "0x30042c", "0x30052a", "0x2f0527", "0x2f0525", "0x2f0623", "0x2f0621", "0x2f061f", "0x2f071d", "0x2f071b", "0x2f0819", "0x2f0817", "0x2e0814", "0x2e0912", "0x2e0910", "0x2e090e", "0x2e0a0c", "0x2e0a0a"
+     ]},
     blueblue:{type:'storage', colors:[
 '0x0D47A1','0x#1565C0','0x1976D2','0x1E88E5','0x2196F3','0x42A5F5','0x64B5F6','0x90CAF9','0xBBDEFB','0x81D4FA','0x4FC3F7','0x29B6F6','0x03A9F4','0x039BE5','0x0288D1','0x0277BD','0x01579B'
            ]},
@@ -39,7 +44,7 @@ try{
     let x_time=1000*60*5;
     let delay =(duration)=> new Promise(resolve=>setTimeout(resolve,duration));
     let msg_txt='help \n';
-    msg_txt+=client.prefix+args[0]+' run roleName stop -остановить смену цветов роли\n';
+    msg_txt+=client.prefix+args[0]+' stop roleName -остановить смену цветов роли\n';
     msg_txt+=client.prefix+args[0]+' run roleName rolePallet changeStep changeSpeed -запустить мигание роли\n';
     msg_txt+='например: '+client.prefix+args[0]+' run colorrole rainblow 10 1\n';
     
@@ -184,7 +189,7 @@ module.exports.runColor=async(client,message,args)=>{
 try{
    
      let  roleName = args[2];
-       let role_name = roleName;
+       let role_name = roleName.replace(/&/g,' ');
        let role = message.guild.roles.find(r=>r.name==role_name); 
        if(!role){await message.reply('Роли с таким названием не существует '); return;};
      
@@ -240,7 +245,7 @@ try{
         let sighns = obj.sighns.slice();
         let inc=0;
         let sighn_pos=0;
-        
+        let max=(obj.max)?obj.max:256;
         let bool = true;
          while (module.exports.system.roles_name[roleName].on){
                    console.log(module.exports.system.roles_name[roleName]);
@@ -255,7 +260,7 @@ try{
                    console.log(item_color.toString(16));
                    i+=Number(step);
                
-              if(i>=256-step){ 
+              if(i>=max-step){ 
                    i=0;
                    sighn_pos = (sighn_pos==sighns.length-1)?0:sighn_pos+1;
                    console.log(inc);
@@ -341,9 +346,11 @@ try{
       this.channel={};
       this.channel.send=function(x){console.log(x);};
    };
-     module.exports.run(client,new MessageSample(),[' ','run','blueblue','alienrolecolor',10,1]);
+     module.exports.run(client,new MessageSample(),[' ','run','Идущий В Тенях','alienrolecolor',5,1]);
    await delay(1000);
-    module.exports.run(client,new MessageSample(),[' ','run','violetblue','mouserolecolor',1,1]);
+    module.exports.run(client,new MessageSample(),[' ','run','👑','mouserolecolor',1,1]);
+   await delay(1000);
+    module.exports.run(client,new MessageSample(),[' ','run','rainblow','rainblowgray',33,1]);
     return;
    
 }catch(err){console.log(err);};
