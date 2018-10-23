@@ -22,8 +22,7 @@ exports.system={ delay_time:1000*3, roles_name:{
 '0x2270f9','0x1b5bc0','0x3b32dd','0x6032dd','0x7732dd','0x8532dd','0x9c32dd','0xb432dd','0xb62dd6','0xc32dca','0xb82dad','0xa42cb6','0x952cb6','0x862cb6','0x9f24f3','0xd224f3','0xd11ec7','0x8d3db4','0x6f38a7'
                            ]},
      alienrolecolor:{ type:'storage',colors:[
-     "0x2e0a0a", "0x2d0b0e", "0x2b0b13", "0x2a0c17", "0x280c1c", "0x270d20", "0x260e25", "0x240e29", "0x230f2e", "0x210f32", "0x201036", "0x1f113b", "0x1d113f", "0x1c1244", "0x1a1248", "0x19134d", "0x181451", "0x161456", "0x15155a", "0x13155f", "0x121663",
-"0x121663", "0x131561", "0x14155f", "0x15145c", "0x16135a", "0x171358", "0x181256", "0x191153", "0x1a1151", "0x1b104f", "0x1c104c", "0x1d0f4a", "0x1e0e48", "0x1f0e46", "0x200d44", "0x210c41", "0x220c3f", "0x230b3d", "0x240a3a", "0x250a38", "0x260936",
+     "0x07083d", "0x09083d", "0x0a083c", "0x0c083c", "0x0d083c", "0x0f083b", "0x10083b", "0x12083b", "0x13083a", "0x15083a", "0x16083a", "0x180939", "0x1a0939", "0x1b0938", "0x1d0938", "0x1e0938", "0x200937", "0x210937", "0x230937", "0x240936", "0x260936",
 "0x260936", "0x240935", "0x230934", "0x210934", "0x200933", "0x1e0832", "0x1c0831", "0x1b0830", "0x190830", "0x18082f", "0x16082e", "0x14082d", "0x13082c", "0x11082c", "0x10082b", "0x0e082a", "0x0c0729", "0x0b0728", "0x090728", "0x080727", "0x060726",
 "0x060726", "0x080727", "0x0a0727", "0x0c0628", "0x0e0629", "0x10062a", "0x13062a", "0x15062b", "0x17052c", "0x19052c", "0x1b052d", "0x1d052e", "0x1f052e", "0x21042f", "0x230430", "0x260430", "0x280431", "0x2a0432", "0x2c0333", "0x2e0333", "0x300334",
 "0x300334", "0x300332", "0x300430", "0x30042e", "0x30042c", "0x30052a", "0x2f0527", "0x2f0525", "0x2f0623", "0x2f0621", "0x2f061f", "0x2f071d", "0x2f071b", "0x2f0819", "0x2f0817", "0x2e0814", "0x2e0912", "0x2e0910", "0x2e090e", "0x2e0a0c", "0x2e0a0a"
@@ -96,7 +95,7 @@ try{
       message.channel.send('роль создана');
       let role_count = message.guild.roles.keyArray().length;
       let position = (role_type=='for color')?role_count-15:(role_type=='special')?Math.floor((role_count-4)/2):1;
-      console.log(role_count);
+     // console.log(role_count);
       message.guild.setRolePosition(role,position,false);
       return role;
     }).catch(error=>{message.channel.send(error.message);});
@@ -248,22 +247,22 @@ try{
         let max=(obj.max)?obj.max:256;
         let bool = true;
          while (module.exports.system.roles_name[roleName].on){
-                   console.log(module.exports.system.roles_name[roleName]);
+                   //console.log(module.exports.system.roles_name[roleName]);
                    let speed = 1000*3*module.exports.system.roles_name[roleName].colorSpeed;
                    //let step=Math.pow(2,module.exports.system.roles_name[roleName].colorStep);
                      let step=module.exports.system.roles_name[roleName].colorStep;
-                   console.log(i);
+                   //console.log(i);
                    item_color+=increase[inc]*step.toString(16)*sighns[sighn_pos];
-                   console.log('delay '+ speed);
+                   //console.log('delay '+ speed);
                    
                    await   role.edit({color:item_color});
-                   console.log(item_color.toString(16));
+                   //console.log(item_color.toString(16));
                    i+=Number(step);
                
               if(i>=max-step){ 
                    i=0;
                    sighn_pos = (sighn_pos==sighns.length-1)?0:sighn_pos+1;
-                   console.log(inc);
+                   //console.log(inc);
                    inc=(inc==increase.length-1)?0:inc+1;
                 };
                if(module.exports.system.roles_name[roleName].on) {await delay(speed); }else{console.log('interrupted');};
@@ -290,15 +289,19 @@ try{
         let sighn = 1;
         let bool = true;
         while (module.exports.system.roles_name[roleName].on){
-                  console.log(module.exports.system.roles_name[roleName]);
+                 // console.log(module.exports.system.roles_name[roleName]);
                 let speed = 1000*3*module.exports.system.roles_name[roleName].colorSpeed;
                 let step=module.exports.system.roles_name[roleName].colorStep;
-                console.log(i+' '+speed);
+                //console.log(i+' '+speed);
                 item_color=colors[i];
                  await   role.edit({color:item_color});
                   i+=step*sighn;
-                  if(i==colors.length||i>colors.length){console.log('cnd1');sighn=(sighn==1)?-1:1;};
-                  if(i==0||i<0){console.log('cnd2');sighn=(sighn==1)?-1:1;};
+                  if(i==colors.length||i>colors.length){
+                   // console.log('cnd1');
+                    sighn=(sighn==1)?-1:1;};
+                  if(i==0||i<0){
+                    //console.log('cnd2');
+                    sighn=(sighn==1)?-1:1;};
                if(module.exports.system.roles_name[roleName].on) {await delay(speed); }else{console.log('interrupted');};
           };//while
         console.log('color stop');

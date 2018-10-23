@@ -22,7 +22,7 @@ try{
     await roles1.onGuildCreate(client);
     await roles2.onGuildCreate(client);
   
-
+*/
   
 let server_id='301063859702071316';
 let templ_channel='488840569674530816';
@@ -36,7 +36,7 @@ if(temp_mmbs_id.length!=0){
     };//
   
 };//if end
-  */
+  
   //------------
   const fs = require('fs');
   
