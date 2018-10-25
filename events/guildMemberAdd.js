@@ -1,20 +1,21 @@
 exports.phrases={
- enter_phrase: 'Для доступа ко все каналам нажмите на реакцию соответствующую тому что изображено на картинке \n Успейте нажать в течении 5 минут\n Нажатие на другие реакции лишит вас возможности получить доступ.',
+ enter_phrase: 'Для доступа ко все каналам нажмите на реакцию соответствующую тому что изображено на картинке \n Успейте нажать в течении 10 минут',
  wrong_phrase:' Выбрана неверная реакция.',
  timeout_phrase:' Время ожидания реакции истекло.',
  waitingForRole_phrase:' Через 5 минут доступ будет открыт.\nА пока почитайте правила сервера <#301319871981944834>',
  tryAgain_phrase:' Попробуй пройти тест еще раз',
  ifFail_phrase:' Перезайди или напиши что-нибудь в этот канал',
  fail_phrase:[
-            'По твоему это #wrong_answer ?..(Правильный ответ: #right_answer) <:40:402137819314651137>',
+            'По твоему это #wrong_answer ?.. <:p_:505096174093598751>',
              'Ты нормальный? #wrong_answer с #right_answer спутал'  
               ],
-  ifFail_phrase:' Перезайди на сервер (инавайт отправлен в лс)',
-  dm_msg:'Вы не прошли проверку на бота для доступа ко всем каналам сервера, перезайдите и попробуйте еще раз.\n https://discord.gg/3Q8ZVhH'
+  ifFail_phrase:' Перезайди на сервер (инвайт отправлен в лс)',
+  dm_msg:'Вы не прошли проверку на бота для доступа ко всем каналам сервера, перезайдите и попробуйте еще раз.\n https://discord.gg/3Q8ZVhH',
+  footer_txt:'Нажатие на другие реакции (кроме верной) не позволит вам пройти тест на бота'
 };
 exports.delay={
- waitingForRole_minutes:1,
- waitingReactions_minutes:1
+ waitingForRole_minutes:5,
+ waitingReactions_minutes:10
 };
 
 exports.secret_arr=[
@@ -104,8 +105,11 @@ try{
             image: {
                 //url: "attachment://"+'r1.jpg'
                  url: "attachment://r1.jpg"
-            }
+            },
+          footer:{text:module.exports.phrases.footer_txt}
         },
+                                        
+                                
         files: [{ attachment: file_name,name:'r1.jpg' }] 
      });
      
