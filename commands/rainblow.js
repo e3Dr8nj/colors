@@ -27,12 +27,22 @@ exports.system={ delay_time:1000*3, roles_name:{
 "0x060726", "0x080727", "0x0a0727", "0x0c0628", "0x0e0629", "0x10062a", "0x13062a", "0x15062b", "0x17052c", "0x19052c", "0x1b052d", "0x1d052e", "0x1f052e", "0x21042f", "0x230430", "0x260430", "0x280431", "0x2a0432", "0x2c0333", "0x2e0333", "0x300334",
 "0x300334", "0x300332", "0x300430", "0x30042e", "0x30042c", "0x30052a", "0x2f0527", "0x2f0525", "0x2f0623", "0x2f0621", "0x2f061f", "0x2f071d", "0x2f071b", "0x2f0819", "0x2f0817", "0x2e0814", "0x2e0912", "0x2e0910", "0x2e090e", "0x2e0a0c", "0x2e0a0a"
      ]},
+           dark_colors:{ type:'storage',colors:[
+          "0x800000", "0x7f0005", "0x7d000a", "0x7c000f", "0x7b0014", "0x7a001a", "0x78001f", "0x770024", "0x760029", "0x74002e", "0x730033", "0x720038", "0x70003d", "0x6f0042", "0x6e0047", "0x6c004c", "0x6b0052", "0x6a0057", "0x69005c", "0x670061", "0x660066"
+           ,"0x660066", "0x610066", "0x5c0066", "0x570066", "0x520066", "0x4c0066", "0x470066", "0x420066", "0x3d0066", "0x380066", "0x330066", "0x2e0066", "0x290066", "0x240066", "0x1f0066", "0x1a0066", "0x140066", "0x0f0066", "0x0a0066", "0x050066", "0x000066"
+          ,"0x000066", "0x000361", "0x00055c", "0x000857", "0x000a52", "0x000d4c", "0x000f47", "0x001242", "0x00143d", "0x001738", "0x001a33", "0x001c2e", "0x001f29", "0x002124", "0x00241f", "0x00261a", "0x002914", "0x002b0f", "0x002e0a", "0x003005", "0x003300"
+         ,"0x003300", "0x063000", "0x0d2e00", "0x132b00", "0x1a2900", "0x202600", "0x262400", "0x2d2100", "0x331f00", "0x3a1c00", "0x401a00", "0x461700", "0x4d1400", "0x531200", "0x5a0f00", "0x600d00", "0x660a00", "0x6d0800", "0x730500", "0x7a0300", "0x800000"
+     ]},
     blueblue:{type:'storage', colors:[
 '0x0D47A1','0x#1565C0','0x1976D2','0x1E88E5','0x2196F3','0x42A5F5','0x64B5F6','0x90CAF9','0xBBDEFB','0x81D4FA','0x4FC3F7','0x29B6F6','0x03A9F4','0x039BE5','0x0288D1','0x0277BD','0x01579B'
            ]},
     redrose:{type:'storage',colors:[
 '0xB71C1C','0xC62828','0xD32F2F','0x#E53935','0xF44336','0xEF5350','0xE57373','0xEF9A9A','0xFFCDD2','0xF8BBD0','0xF48FB1','0xF06292','0xEC407A','0xE91E63','0xD81B60','0xC2185B','0xAD1457','0x880E4F'
+           ]} ,
+           bluedark:{type:'storage',colors:[
+             "0x19052c", "0x1d1136", "0x211c3f", "0x252849", "0x2a3352", "0x2e3f5c", "0x324a66", "0x36566f", "0x3a6179", "0x3e6d82", "0x42788c", "0x478496", "0x4b909f", "0x4f9ba9", "0x53a7b2", "0x57b2bc", "0x5bbec6", "0x60c9cf", "0x64d5d9", "0x68e0e2", "0x6cecec"
            ]}      
+
 
            },//gradients end
 
@@ -255,7 +265,7 @@ try{
                    item_color+=increase[inc]*step.toString(16)*sighns[sighn_pos];
                    //console.log('delay '+ speed);
                    
-                   await   role.edit({color:item_color});
+                   if(client.colors) await   role.edit({color:item_color});
                    //console.log(item_color.toString(16));
                    i+=Number(step);
                
@@ -294,7 +304,7 @@ try{
                 let step=module.exports.system.roles_name[roleName].colorStep;
                 //console.log(i+' '+speed);
                 item_color=colors[i];
-                 await   role.edit({color:item_color});
+              if(client.colors)   await   role.edit({color:item_color});
                   i+=step*sighn;
                   if(i==colors.length||i>colors.length){
                    // console.log('cnd1');
@@ -352,9 +362,18 @@ try{
    await delay(1000);
      module.exports.run(client,new MessageSample(),[' ','run','Идущий в Тенях','alienrolecolor',3,1]);
    await delay(1000);
-    module.exports.run(client,new MessageSample(),[' ','run','👑','mouserolecolor',1,1]);
+     module.exports.run(client,new MessageSample(),[' ','run','buZZira','dark_colors',3,1]);
    await delay(1000);
-    module.exports.run(client,new MessageSample(),[' ','run','rainblow','rainblowgray',33,1]);
+    module.exports.run(client,new MessageSample(),[' ','run','нг 1','mouserolecolor',1,1]);
+  
+   await delay(1000);
+   module.exports.run(client,new MessageSample(),[' ','run','нг 3','bluedark',1,1]);
+   await delay(1000);
+//module.exports.run(client,new MessageSample(),[' ','run','нг 4','rainblowgray',33,1]);
+   await delay(1000);
+//module.exports.run(client,new MessageSample(),[' ','run','нг 5','rainblowgray',66,1]);
+   await delay(1000);
+//module.exports.run(client,new MessageSample(),[' ','run','нг 2','rainblowgray',99,1]);
     return;
    
 }catch(err){console.log(err);};
